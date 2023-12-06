@@ -1,10 +1,10 @@
 package com.moon.slopery.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.moon.slopery.dto.LoginRequestDto;
+import com.moon.slopery.member.dto.LoginRequestDto;
 import com.moon.slopery.jwt.JwtUtil;
-import com.moon.slopery.user.CommonResponseDto;
-import com.moon.slopery.user.entity.UserRoleEnum;
+import com.moon.slopery.CommonResponseDto;
+import com.moon.slopery.member.entity.MemberRoleEnum;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -23,7 +23,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     public JwtAuthenticationFilter(JwtUtil jwtUtil) {
         this.jwtUtil = jwtUtil;
-        setFilterProcessesUrl("/api/user/login");
+        setFilterProcessesUrl("/api/member/login");
     }
 
     @Override
@@ -46,7 +46,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException {
         String username = ((UserDetailsImpl) authResult.getPrincipal()).getUsername();
-        UserRoleEnum role = ((UserDetailsImpl) authResult.getPrincipal()).getUser().getRole();
+        MemberRoleEnum role = ((UserDetailsImpl) authResult.getPrincipal()).getMember().getRole();
 
         String token = jwtUtil.createToken(username, role);
         response.addHeader(JwtUtil.AUTHORIZATION_HEADER, token);

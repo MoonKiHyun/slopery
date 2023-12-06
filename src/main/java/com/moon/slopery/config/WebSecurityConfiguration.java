@@ -60,7 +60,7 @@ public class WebSecurityConfiguration {
         http.authorizeHttpRequests((authorizeHttpRequests) ->
                 authorizeHttpRequests
                         .requestMatchers("/").permitAll()
-                        .requestMatchers("/api/user/**").permitAll()
+                        .requestMatchers("/api/member/**").permitAll()
                         .anyRequest().authenticated());
 
         http.addFilterBefore(jwtAuthorizationFilter(), JwtAuthenticationFilter.class);

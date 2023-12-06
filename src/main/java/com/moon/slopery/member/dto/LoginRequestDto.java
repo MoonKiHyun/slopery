@@ -1,4 +1,4 @@
-package com.moon.slopery.dto;
+package com.moon.slopery.member.dto;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,4 +1,4 @@
-package com.moon.slopery.user.dto;
+package com.moon.slopery.member.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class UserSignupRequestDto {
+public class SignupRequestDto {
 
     @NotNull
     private String userId;

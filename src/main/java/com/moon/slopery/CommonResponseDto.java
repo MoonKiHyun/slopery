@@ -1,4 +1,4 @@
-package com.moon.slopery.user;
+package com.moon.slopery;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;

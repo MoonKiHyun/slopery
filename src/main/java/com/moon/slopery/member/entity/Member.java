@@ -1,8 +1,6 @@
-package com.moon.slopery.user.entity;
+package com.moon.slopery.member.entity;
 
-import com.moon.slopery.user.dto.UserSignupRequestDto;
 import jakarta.persistence.*;
-import jdk.jfr.Timestamp;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
@@ -11,11 +9,11 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "users")
+@Table(name = "member")
 @Getter
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class User {
+public class Member {
 
     @Id
     @Column(nullable = false, unique = true)
@@ -35,14 +33,14 @@ public class User {
 
     @Column(nullable = false)
     @Enumerated(value = EnumType.STRING)
-    private UserRoleEnum role;
+    private MemberRoleEnum role;
 
     @Column
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime regDt;
 
-    public User(String userId, String email, String password, String userName, String phoneNumber, UserRoleEnum role) {
+    public Member(String userId, String email, String password, String userName, String phoneNumber, MemberRoleEnum role) {
         this.email = email;
         this.userId = userId;
         this.userName = userName;

@@ -1,13 +1,13 @@
-package com.moon.slopery.user.entity;
+package com.moon.slopery.member.entity;
 
-public enum UserRoleEnum {
+public enum MemberRoleEnum {
 
-    USER(Authority.USER),
+    MEMBER(Authority.MEMBER),
     ADMIN(Authority.ADMIN);
 
     private final String authority;
 
-    UserRoleEnum(String authority) {
+    MemberRoleEnum(String authority) {
         this.authority = authority;
     }
 
@@ -16,7 +16,7 @@ public enum UserRoleEnum {
     }
 
     public static class Authority {
-        public static final String USER = "ROLE_USER";
+        public static final String MEMBER = "ROLE_MEMBER";
         public static final String ADMIN = "ROLE_ADMIN";
     }
 }

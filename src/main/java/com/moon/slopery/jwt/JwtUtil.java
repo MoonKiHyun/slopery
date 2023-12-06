@@ -1,6 +1,6 @@
 package com.moon.slopery.jwt;
 
-import com.moon.slopery.user.entity.UserRoleEnum;
+import com.moon.slopery.member.entity.MemberRoleEnum;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
@@ -55,7 +55,7 @@ public class JwtUtil {
         return false;
     }
 
-    public String createToken(String username, UserRoleEnum role) {
+    public String createToken(String username, MemberRoleEnum role) {
         Date date = new Date();
 
         return BEARER_PREFIX +
@@ -76,7 +76,7 @@ public class JwtUtil {
         return null;
     }
 
-    public Claims getUserInfoFromToken(String tokenValue) {
+    public Claims getMemberInfoFromToken(String tokenValue) {
         return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(tokenValue).getBody();
     }
 }

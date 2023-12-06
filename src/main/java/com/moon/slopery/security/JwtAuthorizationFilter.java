@@ -35,7 +35,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
                 log.error("Token Validation Error");
             }
 
-            Claims info = jwtUtil.getUserInfoFromToken(tokenValue);
+            Claims info = jwtUtil.getMemberInfoFromToken(tokenValue);
 
             try {
                 setAuthentication(info.getSubject());
