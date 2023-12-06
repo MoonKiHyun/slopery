@@ -3,11 +3,13 @@ package com.moon.slopery.security;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.moon.slopery.dto.LoginRequestDto;
 import com.moon.slopery.jwt.JwtUtil;
+import com.moon.slopery.user.CommonResponseDto;
 import com.moon.slopery.user.entity.UserRoleEnum;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -42,19 +44,29 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     }
 
     @Override
-    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) {
+    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException {
         String username = ((UserDetailsImpl) authResult.getPrincipal()).getUsername();
         UserRoleEnum role = ((UserDetailsImpl) authResult.getPrincipal()).getUser().getRole();
 
         String token = jwtUtil.createToken(username, role);
         response.addHeader(JwtUtil.AUTHORIZATION_HEADER, token);
+
+        CommonResponseDto commonResponseDto = new CommonResponseDto("로그인 성공", HttpStatus.OK.value());
+        commonResponse(response, commonResponseDto);
     }
 
     @Override
-    protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) {
-        log.error("Authentication failed: " + failed.getMessage());
+    protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException {
+        CommonResponseDto commonResponseDto = new CommonResponseDto("로그인 실패", HttpStatus.UNAUTHORIZED.value());
+        commonResponse(response, commonResponseDto);
+    }
 
-        response.setStatus(401);
+    private void commonResponse(HttpServletResponse response, CommonResponseDto commonResponseDto) throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        String jsonResponse = objectMapper.writeValueAsString(commonResponseDto);
+
+        response.setContentType("application/json; charset=utf-8");
+        response.getWriter().write(jsonResponse);
     }
 }
 

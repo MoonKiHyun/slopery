@@ -1,6 +1,6 @@
 package com.moon.slopery.user.controller;
 
-import com.moon.slopery.user.CommonResponsDto;
+import com.moon.slopery.user.CommonResponseDto;
 import com.moon.slopery.user.dto.UserSignupRequestDto;
 import com.moon.slopery.user.service.UserService;
 import jakarta.validation.Valid;
@@ -20,9 +20,9 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/signup")
-    public ResponseEntity<CommonResponsDto> signup(@Valid @RequestBody UserSignupRequestDto requestDto) {
+    public ResponseEntity<CommonResponseDto> signup(@Valid @RequestBody UserSignupRequestDto requestDto) {
         userService.signup(requestDto);
 
-        return ResponseEntity.status(201).body(new CommonResponsDto("회원 가입 완료", HttpStatus.CREATED.value()));
+        return ResponseEntity.status(201).body(new CommonResponseDto("회원 가입 완료", HttpStatus.CREATED.value()));
     }
 }

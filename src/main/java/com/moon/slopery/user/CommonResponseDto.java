@@ -5,12 +5,12 @@ import lombok.Getter;
 
 @Getter
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class CommonResponsDto {
+public class CommonResponseDto {
 
     private final String msg;
     private final int status;
 
-    public CommonResponsDto(String msg, int status) {
+    public CommonResponseDto(String msg, int status) {
         this.msg = msg;
         this.status = status;
     }
