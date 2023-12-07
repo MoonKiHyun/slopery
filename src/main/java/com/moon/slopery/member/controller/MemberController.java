@@ -21,8 +21,6 @@ public class MemberController {
 
     @PostMapping("/signup")
     public ResponseEntity<CommonResponseDto> signup(@Valid @RequestBody SignupRequestDto requestDto) {
-        memberService.signup(requestDto);
-
-        return ResponseEntity.status(201).body(new CommonResponseDto("회원 가입 완료", HttpStatus.CREATED.value()));
+        return memberService.signup(requestDto);
     }
 }
