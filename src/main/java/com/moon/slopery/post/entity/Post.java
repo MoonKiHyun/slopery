@@ -2,6 +2,7 @@ package com.moon.slopery.post.entity;
 
 import com.moon.slopery.Timestamped;
 import com.moon.slopery.member.entity.Member;
+import com.moon.slopery.post.dto.PostRequestDto;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,4 +26,13 @@ public class Post extends Timestamped {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private Member member;
+
+    public Post(PostRequestDto requestDto) {
+        this.title = requestDto.getTitle();
+        this.content = requestDto.getContent();
+    }
+
+    public void setMember(Member member) {
+        this.member = member;
+    }
 }
