@@ -25,18 +25,18 @@ public class MemberService {
         Optional<Member> checkUserId = memberRepository.findById(requestDto.getUserId());
         String userId = requestDto.getUserId();
         if (checkUserId.isPresent()) {
-            return ResponseEntity.status(201).body(new CommonResponseDto("이미 등록된 아이디 입니다", HttpStatus.BAD_REQUEST.value()));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new CommonResponseDto("이미 등록된 아이디 입니다", HttpStatus.BAD_REQUEST.value()));
         }
 
         Optional<Member> checkEmail = memberRepository.findByEmail(requestDto.getEmail());
         String email = requestDto.getEmail();
         if (checkEmail.isPresent()) {
-            return ResponseEntity.status(201).body(new CommonResponseDto("이미 등록된 이메일 입니다.", HttpStatus.BAD_REQUEST.value()));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new CommonResponseDto("이미 등록된 이메일 입니다.", HttpStatus.BAD_REQUEST.value()));
         }
 
         Optional<Member> checkPhoneNumber = memberRepository.findByPhoneNumber(requestDto.getPhoneNumber());
         if (checkPhoneNumber.isPresent()) {
-            return ResponseEntity.status(201).body(new CommonResponseDto("이미 등록된 전화번호 입니다.", HttpStatus.BAD_REQUEST.value()));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new CommonResponseDto("이미 등록된 전화번호 입니다.", HttpStatus.BAD_REQUEST.value()));
         }
 
         String password = passwordEncoder.encode(requestDto.getPassword());
@@ -46,6 +46,6 @@ public class MemberService {
         Member member = new Member(userId, email, password, requestDto.getUserName(), requestDto.getPhoneNumber(), role);
         memberRepository.save(member);
 
-        return ResponseEntity.status(201).body(new CommonResponseDto("회원 가입 완료", HttpStatus.CREATED.value()));
+        return ResponseEntity.status(HttpStatus.CREATED).body(new CommonResponseDto("회원 가입 완료", HttpStatus.CREATED.value()));
     }
 }

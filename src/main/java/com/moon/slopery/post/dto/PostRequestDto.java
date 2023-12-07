@@ -1,5 +1,6 @@
 package com.moon.slopery.post.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,9 +9,9 @@ import lombok.Setter;
 @Setter
 public class PostRequestDto {
 
-    @NotNull
+    @NotBlank
     private String title;
 
-    @NotNull
+    @NotBlank
     private String content;
 }

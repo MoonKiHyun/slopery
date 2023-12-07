@@ -1,6 +1,7 @@
 package com.moon.slopery.member.dto;
 
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,19 +10,19 @@ import lombok.Setter;
 @Setter
 public class SignupRequestDto {
 
-    @NotNull
+    @NotBlank
     private String userId;
 
-    @NotNull
+    @NotBlank
     @Email
     private String email;
 
-    @NotNull
+    @NotBlank
     private String password;
 
-    @NotNull
+    @NotBlank
     private String userName;
 
-    @NotNull
+    @NotBlank
     private String phoneNumber;
 }
