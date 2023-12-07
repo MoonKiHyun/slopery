@@ -58,7 +58,7 @@ public class PostService {
     private Post verifyPostIdAndMember(Long postId, Member member) {
 
         Post post = postRepository.findById(postId).orElseThrow(() ->
-                new IllegalArgumentException("해당 게시물을 찾을 수 없습니다"));
+                new IllegalArgumentException("해당 게시물을 찾을 수 없습니다."));
 
         if (!member.getUserId().equals(post.getMember().getUserId())) {
             throw new IllegalArgumentException("해당 게시글 작성자가 아닙니다.");
